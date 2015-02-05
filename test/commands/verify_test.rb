@@ -105,16 +105,6 @@ class InteragentHyperSchemaVerifyTest < Minitest::Test
   # resource link
   #
 
-  def test_resource_link_href_format
-    pointer('#/definitions/app/links/0').merge!({
-      'href' => '/my_apps'
-    })
-    errors = verify
-    assert_equal 1, errors.count
-    assert_match %r{^#/definitions/app/links/0/href: }, errors[0]
-    assert_match /\/my_apps does not match /, errors[0]
-  end
-
   def test_resource_link_required
     pointer('#/definitions/app/links/0').delete('method')
     errors = verify
