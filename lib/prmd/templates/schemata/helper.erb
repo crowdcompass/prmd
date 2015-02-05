@@ -51,6 +51,17 @@
           attribute[0] = "#{key}/#{attribute[0]}"
         end
         attributes.concat(nested)
+      # does items just contain refs?
+      elsif value['items'] && value['items'].is_a?(Hash) && value['items'].has_key?('$ref')
+        ref = value['items']
+        _, item = schema.dereference(ref)
+        if item['properties']
+          nested = extract_attributes(schema, item['properties'])
+          nested.each do |attribute|
+            attribute[0] = "#{key}:#{attribute[0]}"
+          end
+          attributes.concat(nested)
+        end
       # just a regular attribute
       else
         attributes << build_attribute(schema, key, value)
