@@ -63,7 +63,7 @@
                 },
                 "properties": {
                     "patternProperties": {
-                        "^[a-z][a-z_]*[a-z]$": {
+                        "^.+$": {
                             "$ref": "#/definitions/resourceProperty"
                         }
                     },
