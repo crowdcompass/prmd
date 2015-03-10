@@ -76,7 +76,6 @@
             },
             "required": [
                 "definitions",
-                "description",
                 "links",
                 "title",
                 "type"
@@ -94,12 +93,15 @@
                 {
                     "required": ["type"],
                     "type": ["object"]
+                },
+                {
+                    "required": ["$ref"],
+                    "type": ["object"]
                 }
             ],
             "not": {
                 "required": ["links"]
-            },
-            "required": ["description"]
+            }
         },
         "resourceLink": {
             "properties": {
@@ -137,7 +139,7 @@
                             "type": "boolean"
                         }
                     },
-                    "required": ["description", "properties", "type"]
+                    "required": ["properties", "type"]
                 },
                 {
                     "properties": {
@@ -145,7 +147,7 @@
                             "$ref": "#/definitions/ref"
                         }
                     },
-                    "required": ["description", "items", "type"]
+                    "required": ["items", "type"]
                 }
             ]
         }
