@@ -29,8 +29,12 @@ module Prmd
       end
       if hash.key?('href') && hash['href'].is_a?(String)
         hash['href'] = hash['href'].gsub('%23', '')
-                                   .gsub(/%2Fschemata(%2F[^%]*%2F)/,
-                                         '%23%2Fdefinitions\1')
+        if hash['href'] =~ /%2Fschemata/
+          hash['href'] = hash['href'].gsub(/%2Fschemata(%2F[^%]*%2F)/,
+                                           '%23%2Fdefinitions\1')
+        else
+          hash['href'] = hash['href'].gsub(/\{\(%2F/, '{(%23%2Fdefinitions%2F')
+        end
       end
       hash.each_with_object({}) { |(k, v), r| r[k] = reference_localizer(v) }
     end
